@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react"; // Import Icons
+import { Menu, X, CloudSnow } from "lucide-react"; // Added CloudSnow
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -39,7 +39,7 @@ export default function Navbar() {
             WINTERSTONE
           </Link>
           
-          {/* DESKTOP LINKS (Hidden on Mobile) */}
+          {/* DESKTOP LINKS */}
           <div className="hidden md:flex space-x-12 text-xs tracking-[0.2em] uppercase font-medium">
             <Link href="/#sanctuary" className="hover:text-saffron transition-colors cursor-pointer">
               Sanctuary
@@ -53,14 +53,20 @@ export default function Navbar() {
           </div>
 
           {/* RIGHT SIDE ACTIONS */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6"> {/* Increased gap slightly */}
             
-            {/* BOOK BUTTON (Visible on both, but maybe hide on very small phones if needed) */}
+            {/* --- NEW: WEATHER PILL --- */}
+            <div className="hidden md:flex items-center gap-2 text-white/80 pr-4 border-r border-white/20">
+              <CloudSnow size={16} />
+              <span className="text-xs font-medium tracking-wider">-4°C</span>
+            </div>
+
+            {/* BOOK BUTTON */}
             <Link href="/book" className="hidden sm:block bg-white text-[#1A2F25] px-6 py-3 text-[10px] font-bold tracking-widest uppercase hover:bg-saffron hover:text-white transition-colors">
               Book Now
             </Link>
 
-            {/* HAMBURGER ICON (Visible ONLY on Mobile) */}
+            {/* HAMBURGER ICON */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden text-white hover:text-saffron transition-colors z-50 relative"
@@ -97,7 +103,6 @@ export default function Navbar() {
             >
               Rooms
             </Link>
-            
             <Link 
               href="/blog" 
               onClick={() => setIsMobileMenuOpen(false)}
@@ -105,6 +110,12 @@ export default function Navbar() {
             >
               Journal
             </Link>
+
+            {/* Mobile Weather Display */}
+            <div className="flex items-center gap-3 text-white/60">
+              <CloudSnow size={20} />
+              <span className="text-lg font-serif">-4°C • Heavy Snow</span>
+            </div>
 
             <div className="w-12 h-[1px] bg-white/20 my-4"></div>
 
